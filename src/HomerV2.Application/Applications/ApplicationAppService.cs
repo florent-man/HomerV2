@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Homer.Applications.Dtos;
 using HomerV2.Enums;
@@ -21,16 +22,6 @@ namespace HomerV2.Applications
         {
             var applications = await _applicationRepository.GetListAsync();
             return ObjectMapper.Map<List<Application>, List<ApplicationDto>>(applications);
-        }
-
-        Task<ApplicationDto> IApplicationAppService.GetAsync(Guid id)
-        {
-            return GetAsync(id);
-        }
-        
-        Task<List<ApplicationDto>> IApplicationAppService.GetListAsync()
-        {
-            return GetListAsync();
         }
 
         public async Task<ApplicationDto> GetAsync(Guid id)
@@ -58,31 +49,6 @@ namespace HomerV2.Applications
             await _applicationRepository.DeleteAsync(id);
         }
 
-        Task IApplicationAppService.ChangeNameAsync(Guid id, ChangeApplicationNameDto input)
-        {
-            return ChangeNameAsync(id, input);
-        }
-
-        Task IApplicationAppService.ChangeLogoAsync(Guid id, ChangeApplicationLogoDto input)
-        {
-            return ChangeLogoAsync(id, input);
-        }
-
-        Task IApplicationAppService.ChangeUrlAsync(Guid id, ChangeApplicationUrlDto input)
-        {
-            return ChangeUrlAsync(id, input);
-        }
-
-        Task IApplicationAppService.ChangeTargetAsync(Guid id, ChangeApplicationTargetDto input)
-        {
-            return ChangeTargetAsync(id, input);
-        }
-
-        Task IApplicationAppService.UpdateMenuTypesAsync(Guid id, UpdateApplicationMenuTypesDto input)
-        {
-            return UpdateMenuTypesAsync(id, input);
-        }
-
         public async Task ChangeNameAsync(Guid id, ChangeApplicationNameDto input)
         {
             var application = await _applicationRepository.GetAsync(id);
@@ -103,6 +69,21 @@ namespace HomerV2.Applications
             {
                 throw new ArgumentException("Le logo fourni est invalide.");
             }
+        }
+        
+        public async Task<List<ChangeApplicationLogoDecodedDto>> GetApplicationsWithDecodedLogosAsync(MenuTypes menuType)
+        {
+            var applications = await _applicationRepository.GetListAsync(app => app.MenuTypes == menuType);
+
+            foreach (var application in applications)
+            {
+                application.GetLogoAsByteArray()
+            }
+            // Mapper les entités vers des DTOs avec le décodage du logo
+            return applications.Select(app => new ChangeApplicationLogoDecodedDto
+            {
+                DecodedLogo = $"data:image/png;base64,{app.Logo}", 
+            }).ToList();
         }
 
 
@@ -126,15 +107,13 @@ namespace HomerV2.Applications
             application.UpdateMenuTypes(input.MenuTypes);
             await _applicationRepository.UpdateAsync(application);
         }
+
         public async Task<List<ApplicationDto>> GetListByMenuTypeAsync(MenuTypes menuType)
         {
-            var applications = await _applicationRepository
-                .GetListAsync(app => app.MenuTypes == menuType );
+            var applications = await _applicationRepository.GetListAsync(app => app.MenuTypes == menuType);
 
             // Mapper les entités vers des DTOs
             return ObjectMapper.Map<List<Application>, List<ApplicationDto>>(applications);
         }
-
-        
     }
 }

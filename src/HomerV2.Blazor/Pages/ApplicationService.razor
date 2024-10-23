@@ -19,7 +19,7 @@ else
     <ul>
         @foreach (var app in Applications)
         {
-            <li>
+            Application.Decode(@app.Logo);
                 <a href="@app.Url" target="@app.Target">
                     <img src="@app.Logo" alt="@app.Name" width="50" /> @app.Name
                 </a>

@@ -102,10 +102,10 @@ public class HomerV2DbContext :
 
             b.ConfigureByConvention();
 
-            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Logo).HasMaxLength(256);
-            b.Property(x => x.Url).HasMaxLength(256);
-            b.Property(x => x.Target).HasMaxLength(64);
+            b.Property(x => x.Name).IsRequired();
+            b.Property(x => x.Logo);
+            b.Property(x => x.Url);
+            b.Property(x => x.Target);
             b.Property(x => x.MenuTypes)
                 .HasConversion<int>()
                 .IsRequired();

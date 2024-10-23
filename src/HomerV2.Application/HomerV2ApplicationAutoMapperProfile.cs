@@ -8,7 +8,10 @@ public class HomerV2ApplicationAutoMapperProfile : Profile
 {
     public HomerV2ApplicationAutoMapperProfile()
     {
+
+        CreateMap<Application, ApplicationDto>();
         CreateMap<ApplicationDto, Application>();
+
         CreateMap<ChangeApplicationNameDto, Application>().ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         CreateMap<ChangeApplicationLogoDto, Application>().ForMember(dest => dest.Logo, opt => opt.MapFrom(src => src.Logo));
         CreateMap<ChangeApplicationUrlDto, Application>().ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Url));
