@@ -1,0 +1,11 @@
+global:
+  hosts:
+    dbmigrator: "[RELEASE_NAME]-dbmigrator"
+    blazorserver: "[RELEASE_NAME]-blazorserver"
+  connectionStrings:
+    default: "Host=[RELEASE_NAME]-postgresql;Port=5432;Database=HomerV2;User ID=postgres;Password=myPassword;"
+  dotnetEnvironment: "Staging"
+  disablePII: "false"
+  stringEncryptionDefaultPassPhrase: "IbQq10kcdSyRrXyq"
+  abpStudioClient:
+    isLinkEnabled: "true"

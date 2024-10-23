@@ -1,0 +1,4 @@
+global:
+  tlsSecret: "homerv2-local-tls"
+  abpStudioClient:
+    studioUrl: "http://abp-studio-proxy:38271"

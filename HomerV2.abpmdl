@@ -1,0 +1,109 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.TextTemplateManagement": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Chat": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.LanguageManagement": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.FileManagement": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict.Pro": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.Gdpr": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.AuditLogging.Pro": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Saas": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity.Pro": {
+      "version": "8.3.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account.Pro": {
+      "version": "8.3.1",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "HomerV2.Application": {
+      "path": "src/HomerV2.Application/HomerV2.Application.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.Application.Tests": {
+      "path": "test/HomerV2.Application.Tests/HomerV2.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "HomerV2.Domain.Shared": {
+      "path": "src/HomerV2.Domain.Shared/HomerV2.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.Application.Contracts": {
+      "path": "src/HomerV2.Application.Contracts/HomerV2.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.HttpApi": {
+      "path": "src/HomerV2.HttpApi/HomerV2.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.HttpApi.Client": {
+      "path": "src/HomerV2.HttpApi.Client/HomerV2.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.EntityFrameworkCore.Tests": {
+      "path": "test/HomerV2.EntityFrameworkCore.Tests/HomerV2.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "HomerV2.EntityFrameworkCore": {
+      "path": "src/HomerV2.EntityFrameworkCore/HomerV2.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.TestBase": {
+      "path": "test/HomerV2.TestBase/HomerV2.TestBase.abppkg",
+      "folder": "test"
+    },
+    "HomerV2.Domain.Tests": {
+      "path": "test/HomerV2.Domain.Tests/HomerV2.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "HomerV2.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/HomerV2.HttpApi.Client.ConsoleTestApp/HomerV2.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "HomerV2.DbMigrator": {
+      "path": "src/HomerV2.DbMigrator/HomerV2.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.Blazor": {
+      "path": "src/HomerV2.Blazor/HomerV2.Blazor.abppkg",
+      "folder": "src"
+    },
+    "HomerV2.Domain": {
+      "path": "src/HomerV2.Domain/HomerV2.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

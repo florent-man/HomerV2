@@ -1,0 +1,69 @@
+﻿@page "/applications/add"
+@using System.IO
+@using Homer.Applications.Dtos
+@using HomerV2.Applications
+@using HomerV2.Enums
+@using HomerV2
+@inject IApplicationAppService ApplicationAppService
+@inject NavigationManager Navigation
+
+<h3>Ajouter une application</h3>
+
+<EditForm Model="newApplication" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Nom de l'application</label>
+        <InputText id="name" class="form-control" @bind-Value="newApplication.Name" />
+    </div>
+
+    <div class="form-group">
+        <label for="logo">Logo</label>
+        <InputFile id="logo" class="form-control" OnChange="HandleLogoUpload" />
+    </div>
+
+    <div class="form-group">
+        <label for="url">URL</label>
+        <InputText id="url" class="form-control" @bind-Value="newApplication.Url" />
+    </div>
+
+    <div class="form-group">
+        <label for="target">Cible (_blank ou _self)</label>
+        <InputText id="target" class="form-control" @bind-Value="newApplication.Target" />
+    </div>
+
+    <div class="form-group">
+        <label for="menuTypes">Types de menu</label>
+        <InputSelect id="menuTypes" class="form-control" @bind-Value="newApplication.MenuTypes" TValue="MenuTypes">
+            <option value="">-- Sélectionnez un type de menu --</option>
+            @foreach (MenuTypes type in Enum.GetValues(typeof(MenuTypes)))
+            {
+            <option value="@type">@type</option>
+            }
+        </InputSelect>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter l'application</button>
+</EditForm>
+
+@code {
+private ApplicationDto newApplication = new ApplicationDto();
+
+private async Task HandleLogoUpload(InputFileChangeEventArgs e)
+{
+var file = e.File;
+if (file != null)
+{
+using var stream = new MemoryStream();
+await file.OpenReadStream().CopyToAsync(stream);
+newApplication.Logo = Convert.ToBase64String(stream.ToArray());
+}
+}
+
+private async Task HandleValidSubmit()
+{
+await ApplicationAppService.CreateAsync(newApplication);
+Navigation.NavigateTo("/applications/services");
+}
+}

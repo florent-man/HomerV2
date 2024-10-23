@@ -1,0 +1,38 @@
+﻿@page "/applications/qualif"
+@using Homer.Applications.Dtos
+@using HomerV2.Applications
+@using HomerV2.Enums
+@inject IApplicationAppService ApplicationAppService
+
+<h3>Applications - Qualif</h3>
+
+@if (Applications == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (Applications.Count == 0)
+{
+    <p><em>Aucune application trouvée.</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var app in Applications)
+        {
+            <li>
+                <a href="@app.Url" target="@app.Target">
+                    <img src="@app.Logo" alt="@app.Name" width="50" /> @app.Name
+                </a>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    private List<ApplicationDto> Applications;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Applications = await ApplicationAppService.GetListByMenuTypeAsync(MenuTypes.Qualif);
+    }
+}
